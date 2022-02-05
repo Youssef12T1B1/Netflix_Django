@@ -79,11 +79,12 @@ TEMPLATES = [
 
 SITE_ID = 1
  
-ACCOUNT_AUTHENTIFICATION_METHOD = 'email'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = None
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'
 
 
 
@@ -151,6 +152,10 @@ AUTH_USER_MODEL = 'base.maUser'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
+
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 AUTHENTICATION_BACKENDS = [
     
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -160,5 +165,3 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
     
 ]
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
