@@ -11,6 +11,7 @@ urlpatterns = [
     path('profile/create', CreateProfile.as_view(), name='CreateProfile'),
     path('watch/<str:id>/', views.WatchStuff, name='WatchStuff'),
     path('details/<str:id>/', views.ShowDetails, name='ShowDetails'),
+    path('play/<str:id>/', views.PlayStuff, name='PlayStuff'),
 
  
 ]

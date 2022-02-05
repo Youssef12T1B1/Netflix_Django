@@ -65,12 +65,11 @@ def WatchStuff(request, id):
     except print('errr'):
         return redirect('profile')
             
+@login_required(login_url='account_login')             
 def ShowDetails(request, id):
-   
+    
         if Movie.objects.get(id=id):
             movie = Movie.objects.get(id=id)
-            def movie_genre(self):
-                 return ', '.join([a.movie_genre for a in self.Movie.all()])
             return render(request,'Details.html',{
             'movie': movie,
         }) 
@@ -81,7 +80,25 @@ def ShowDetails(request, id):
         }) 
         else:
             return redirect('profile')
+    
 
+
+@login_required(login_url='account_login')   
+def PlayStuff(request, id):
+    if Movie.objects.get(id=id):
+            movie = Movie.objects.get(id=id)
+            movie = movie.video.values()
+            return render(request,'showStuff.html',{
+            'movie': list(movie),
+        }) 
+    elif Tvshows.objects.get(id=id):
+            tvshow = Tvshows.objects.get(id=id)
+            tvshow = tvshow.video.values()
+            return render(request,'showStuff.html',{
+            'tvshow': tvshow,
+        }) 
+    else:
+        return redirect('profile')
 
 
 
