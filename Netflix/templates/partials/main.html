@@ -7,12 +7,33 @@
     <title>Netflix - {{ title }} </title>
    <link rel="stylesheet" href="{% static 'style/style.css' %}">
    {% block script %} {% endblock script %}
-
+  
 </head>
 
-<body class="bg-black text-gray-100" >
+<body class="bg-black text-gray-100 font-primary " >
+
+
     {% block content %}
 
 {% endblock content%}
+
+
+<script>
+const nav = document.querySelector('nav')
+document.addEventListener("scroll", e=>{
+    if(scrollY>100){
+        nav.classList.add('bg-grey-900')
+    }else{
+        nav.classList.remove('bg-grey-900')
+    }
+
+
+})
+
+</script>
+
+
+
+
 </body>
 </html>
