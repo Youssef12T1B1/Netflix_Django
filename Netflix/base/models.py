@@ -62,6 +62,9 @@ class Episode(models.Model):
     number = models.CharField(max_length=10)
     season = models.ForeignKey('Season', on_delete=models.CASCADE)
     Tvshow = models.ForeignKey('Tvshows', on_delete=models.CASCADE)
+    
+    uuid = models.UUIDField(default=uuid.uuid4)
+    video = models.ManyToManyField(Video)
 
 Statu_Choises = (
     ('completed', 'Completed'),
@@ -77,6 +80,7 @@ class Tvshows(models.Model):
     poster = models.ImageField(upload_to ='Posters') 
     rating = models.ForeignKey(Rate, on_delete=models.SET_NULL , null=True)
     Status = models.CharField(max_length=200, choices=Statu_Choises , null=True)
+    uuid = models.UUIDField(default=uuid.uuid4)
 
 
 

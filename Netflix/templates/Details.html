@@ -12,19 +12,26 @@
 
 
     <main class='bg-primary_black min-h-screen w-full'>
-        <section class="h-screen relative bg-no-repeat pb-8 pl-6 flex  items-end bg-cover" style="background-image: url({{movie.poster.url}});">
+       
+            
+            {% if page == 'movie' %}
+            <section class="h-screen relative bg-no-repeat pb-8 pl-6 flex  items-end bg-cover" style="background-image: url({{movie.poster.url}});">
             <div>
-                
                 <h2 class="text-6xl font-semibold text-white my-4">
                     {{movie.title}}
                 </h2>
                 <p class=" w-11/12 md:w-5/12 font-medium text-white my-4">
-                    {{movie.year}} Rated : {{movie.rating}} <br>
+                    {% for genre in genres %}
+                   <span class="text-2xl" style="font-weight: 700;">{{genre.name}}</span> 
+                    {% endfor %}
+                    <br>
+                   <span style="font-weight: 700;"> {{movie.year}} Rated : {{movie.rating}} </span><br>
+                  
                     {{movie.Storyline}}
                   
                 </p>
                 <div class="flex my-4">
-                    <a href="{% url 'PlayStuff' movie.id %}">
+                    <a href="{% url 'PlayStuff' movie.uuid %}">
                     <button class="flex items-center bg-white py-2 px-5 rounded-md"style="color: black;" >
                         <ion-icon name="play" class="text-2xl"></ion-icon>
                         <span class="ml-3 font-medium" style="color: black;">
@@ -36,32 +43,11 @@
                     
                 </div>
             </div>
+         
         </section> 
         <section class='bg-primary_black  min-h-screen flex justify-center py-10'>
             <div class="p-8 w-10/12 relative" >
-                <!-- {% if movie.rating == 'R' %}
-                <div   style=" margin-top:2rem;margin-bottom:2erm;">   
-
-               <h2 class ='text-gray-200 text-3xl font-medium'>
-                   Ep
-
-               </h2>
-               
-               {% for ep in movie.videos.all %}
-
-                        <h3   class="tect-lg"> 
-                        <a href="href= {% url 'PlayStuff' movie.uuid %}?epi={{forloop.counter0}}">
-                        {{forloop.counter}} -  {{ep.title}}
-                    </a> 
-                        <h3>
-                        {% endfor %}
-                </div>  
-                       {% endif %} -->
-
-
-
-
-
+              
                 <h2 class="text-gray-200 text-3xl font-medium">
                     Storyline 
                 </h2>
@@ -73,6 +59,56 @@
                 
             </div>
         </section>
+
+        {% else %}
+        <section class="h-screen relative bg-no-repeat pb-8 pl-6 flex  items-end bg-cover" style="background-image: url({{episode.Tvshow.poster.url}});">
+        <div>
+            <h2 class="text-4xl font-semibold text-white my-4">
+                Season: {{episode.season.number}} <br> Ep: N°{{episode.number}} ( {{episode.name}} ) 
+            </h2>
+            <p class=" w-11/12 md:w-5/12 font-medium text-white my-4">
+                {% for genre in genres %}
+               <span class="text-2xl" style="font-weight: 700;">{{genre.name}}<span> 
+                {% endfor %} 
+               
+               <span style="font-weight: 700;"> {{episode.Tvshow.year}} Rated : {{episode.Tvshow.rating}}  </span><br>
+               <span>{{episode.Tvshow.Status}}</span>
+              
+                
+              
+            </p>
+            <div class="flex my-4">
+                <a href="{% url 'PlayStuff' episode.uuid %}">
+                <button class="flex items-center bg-white py-2 px-5 rounded-md"style="color: black;" >
+                    <ion-icon name="play" class="text-2xl"></ion-icon>
+                    <span class="ml-3 font-medium" style="color: black;">
+                        Play
+                    </span>
+                </button>
+                </a>
+
+                
+            </div>
+        </div>
+    </section> 
+    <section class='bg-primary_black  min-h-screen flex justify-center py-10'>
+        <div class="p-8 w-10/12 relative" >
+         
+            <h2 class="text-gray-200 text-3xl font-medium">
+                Storyline 
+            </h2>
+            <br>
+
+            <div class="flex justify-center  items-center min-w-full  movie_lis">
+                <p class="text-gray-100 text-lg">
+                    {{episode.description}}
+                </p>
+            </div>
+            
+        </div>
+    </section>
+    
+        {% endif %}
         
     </main>
     

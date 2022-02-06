@@ -13,5 +13,4 @@ urlpatterns = [
     path('details/<str:id>/', views.ShowDetails, name='ShowDetails'),
     path('play/<str:id>/', views.PlayStuff, name='PlayStuff'),
 
- 
 ]
